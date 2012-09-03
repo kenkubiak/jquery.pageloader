@@ -69,7 +69,7 @@ limitations under the License.
         backward:function () {
             return this.each(function () {
                 var $loader = $(this).data(dataKey);
-                $loader.forward();
+                $loader.backward();
             });
         },
 
@@ -560,12 +560,16 @@ limitations under the License.
 
         forward: function (callback) {
             var path = this.current().data('next-page');
-            this.transition_to(this.lookup(path), callback);
+            if( typeof(path) !== 'undefined' ) {
+                this.transition_to(this.lookup(path), callback);
+            }
         },
 
         backward: function (callback) {
             var path = this.current().data('prev-page');
-            this.transition_to(this.lookup(path), -1, callback);
+            if( typeof(path) !== 'undefined' ) {
+                this.transition_to(this.lookup(path), -1, callback);
+            }
         },
 
         transition_start: function ($from, $to, dir) {
